@@ -10,16 +10,20 @@ async function getInfo() {
         return;
     }
 
-    const response = await fetch(BASE_URL + busId);
-    const data = await response.json();
+    try {
+        const response = await fetch(BASE_URL + busId);
+        const data = await response.json();
 
-    busUl.innerHTML = '';
+        busUl.innerHTML = '';
 
-    stopName.textContent = data.name;
-    Object.entries(data.buses)
-        .forEach(([bus, time]) => {
-            const li = document.createElement('li');
-            li.textContent = `Bus ${bus} arrives in ${time} minutes`;
-            busUl.appendChild(li);
-        })
+        stopName.textContent = data.name;
+        Object.entries(data.buses)
+            .forEach(([bus, time]) => {
+                const li = document.createElement('li');
+                li.textContent = `Bus ${bus} arrives in ${time} minutes`;
+                busUl.appendChild(li);
+            })
+    } catch (error) {
+        stopName.textContent = 'Error';
+    } 
 }
