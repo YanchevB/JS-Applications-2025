@@ -9,39 +9,44 @@ async function lockedProfile() {
         }
     }
 
-    const response = await fetch(BASE_URL, options);
-    const data = await response.json();
+    try {
+        const response = await fetch(BASE_URL, options);
+        const data = await response.json();
 
-    main.innerHTML = '';
+        main.innerHTML = '';
 
-    Object.entries(data).forEach(([id, body]) => {
-        main.innerHTML += `
+        Object.entries(data).forEach(([_, body], index) => {
+            const userIndex = index + 1
+            main.innerHTML += `
             <div class="profile">
                 <img src="./iconProfile2.png" class="userIcon" />
                 <label>Lock</label>
-                <input type="radio" name="user${id}Locked" value="lock" checked>
+                <input type="radio" name="user${userIndex}Locked" value="lock" checked>
                 <label>Unlock</label>
-                <input type="radio" name="user${id}Locked" value="unlock"><br>
+                <input type="radio" name="user${userIndex}Locked" value="unlock"><br>
                 <hr>
                 <label>Username</label>
-                <input type="text" name="user${id}Username" value="${body.username}" disabled readonly />
+                <input type="text" name="user${userIndex}Username" value="${body.username}" disabled readonly />
                 <div class="user1Username">
                     <hr>
                     <label>Email:</label>
-                    <input type="email" name="user${id}Email" value="${body.email}" disabled readonly />
+                    <input type="email" name="user${userIndex}Email" value="${body.email}" disabled readonly />
                     <label>Age:</label>
-                    <input type="number" name="user${id}Age" value="${body.age}" disabled readonly />
+                    <input type="number" name="user${userIndex}Age" value="${body.age}" disabled readonly />
                 </div>
 
                 <button>Show more</button>
             </div>`
-    })
+        })
 
-    const userInfo = document.querySelectorAll('div .user1Username');
-    Array.from(userInfo).forEach(user => user.style.display = 'none');
+        const userInfo = document.querySelectorAll('.user1Username');
+        Array.from(userInfo).forEach(user => user.style.display = 'none');
 
-    const btns = document.querySelectorAll('button');
-    Array.from(btns).forEach(button => button.addEventListener('click', onClick));
+        const btns = document.querySelectorAll('button');
+        Array.from(btns).forEach(button => button.addEventListener('click', onClick));
+    } catch (error) {
+        alert(error);
+    }
 
     function onClick(e) {
         const button = e.target;
