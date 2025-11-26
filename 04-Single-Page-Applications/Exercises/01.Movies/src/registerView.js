@@ -1,4 +1,6 @@
+import { showHome } from "./homeView.js";
 import { userService } from "./userService.js";
+import { userUtils } from "./userUtils.js";
 
 const sections = document.querySelectorAll('section');
 const registerSection = document.getElementById('form-sign-up');
@@ -20,5 +22,6 @@ async function onSubmit(e) {
   }
 
   const userData = await userService.register({email, password});
-  debugger;
+  userUtils.saveUserData(userData);
+  showHome();
 }
