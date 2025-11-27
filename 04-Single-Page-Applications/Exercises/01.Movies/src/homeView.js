@@ -1,6 +1,6 @@
 import { showCreateView } from "./createView.js";
 import { dataService } from "./dataService.js";
-import { showDetailsView } from "./detailsView.js";
+import { showDetailsViewHandler } from "./detailsView.js";
 import { userUtils } from "./userUtils.js";
 
 const sections = document.querySelectorAll('section');
@@ -49,6 +49,22 @@ function createMovie(data) {
       
     </div>
 `
-!!userData && li.querySelector('button').addEventListener('click', showDetailsView)
+!!userData && li.querySelector('button').addEventListener('click', showDetailsViewHandler)
 return li
+}
+
+export function updateNav() {
+  const welcomeMessage = document.getElementById('welcome-msg');
+  const userLi = document.querySelectorAll('li.user');
+  const guestLi = document.querySelectorAll('li.guest')
+  const userData = userUtils.getUserData()
+
+  if (userData) {
+    guestLi.forEach(li => li.style.display = 'none');
+    userLi.forEach(li => li.style.display = 'block');
+    welcomeMessage.textContent = `Welcome ${userData.email}`
+  } else {
+    guestLi.forEach(li => li.style.display = 'block');
+    userLi.forEach(li => li.style.display = 'none');
+  }
 }

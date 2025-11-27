@@ -1,5 +1,5 @@
 import { dataService } from "./dataService.js";
-import { showHome } from "./homeView.js";
+import { showHome, updateNav } from "./homeView.js";
 
 const sections = document.querySelectorAll('section');
 const createSection = document.getElementById('add-movie');
@@ -23,4 +23,5 @@ async function onSubmit(e) {
 
   await dataService.addMovie({title, description, img});
   showHome();
+  updateNav();
 }

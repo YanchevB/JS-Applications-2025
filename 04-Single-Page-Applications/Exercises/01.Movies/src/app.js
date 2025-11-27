@@ -1,5 +1,5 @@
 import { showCreateView } from "./createView.js";
-import { showHome } from "./homeView.js";
+import { showHome, updateNav } from "./homeView.js";
 import { showLoginView } from "./loginView.js";
 import { logout } from "./logout.js";
 import { showRegisterView } from "./registerView.js";
@@ -8,6 +8,7 @@ document.querySelectorAll('section').forEach(section => section.style.display = 
 document.querySelector('nav').addEventListener('click', onNavigate);
 
 showHome();
+updateNav();
 
 const routes = {
   '/': showHome,

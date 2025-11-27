@@ -6,8 +6,13 @@ const section = document.querySelectorAll('section');
 const detailsView = document.getElementById('movie-example');
 const editView = document.getElementById('edit-movie');
 
-export async function showDetailsView(e) {
+export function showDetailsViewHandler(e) {
+  e.preventDefault();
   const id = e.target.dataset.id;
+  showDetailsView(id);
+}
+
+async function showDetailsView(id) {
   section.forEach(section => section.style.display = 'none');
   detailsView.style.display = 'block';
 
@@ -76,7 +81,7 @@ async function editMovie(e) {
       <label for="imageUrl">Image url</label>
       <input id="imageUrl" type="text" class="form-control" placeholder="Image Url" value=${movie.img} name="img" />
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" data-id=${movie._id} class="btn btn-primary">Submit</button>
   </form>
   `
   const form = editView.querySelector('form');
@@ -101,5 +106,5 @@ async function onSubmit(e) {
   const { title, description, img } = Object.fromEntries(formData);
 
   await dataService.updateMovies(id ,{ title, description, img });
-  showHome();
+  showDetailsView(id);
 }

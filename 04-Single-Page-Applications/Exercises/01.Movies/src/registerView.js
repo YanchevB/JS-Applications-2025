@@ -1,4 +1,4 @@
-import { showHome } from "./homeView.js";
+import { showHome, updateNav } from "./homeView.js";
 import { userService } from "./userService.js";
 import { userUtils } from "./userUtils.js";
 
@@ -24,4 +24,5 @@ async function onSubmit(e) {
   const userData = await userService.register({email, password});
   userUtils.saveUserData(userData);
   showHome();
+  updateNav();
 }
