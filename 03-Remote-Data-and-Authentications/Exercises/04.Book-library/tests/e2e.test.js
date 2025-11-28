@@ -5,8 +5,8 @@ const host = 'http://localhost:3000'; // Application host (NOT service host - th
 
 const interval = 300;
 const timeout = 8000;
-const DEBUG = false;
-const slowMo = 500;
+const DEBUG = true;
+const slowMo = 1000;
 
 const mockData = {
   catalog: [
@@ -113,7 +113,7 @@ describe('E2E tests', function () {
       expect(postData.author).to.equal(data.author + '1');
     });
 
-    it('Edit should populate form with correct data', async () => {
+    it.only('Edit should populate form with correct data', async () => {
       const info = mockData.catalog;
       const data = mockData.catalog[0];
       await page.goto(host);
