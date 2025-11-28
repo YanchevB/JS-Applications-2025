@@ -8,16 +8,16 @@ const formRoot = document.getElementById('formRoot');
 const tableTemp = (books) => html`
   <button id="loadBooks" @click=${onLoadAllBooks}>LOAD ALL BOOKS</button>
     <table>
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-          ${books?.map(book => html`${bookTemp(book)}`)}
-        </tbody>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${books?.map(book => html`${bookTemp(book)}`)}
+      </tbody>
     </table>`
 
 const createFormTemp = () => html`
@@ -46,8 +46,8 @@ const bookTemp = (data) => html`
     <td>${data.title}</td>
     <td>${data.author}</td>
     <td>
-        <button @click=${onEdit} data-id=${data.id}>Edit</button>
-        <button @click=${onDelete} data-id=${data.id}>Delete</button>
+      <button @click=${onEdit} data-id=${data.id}>Edit</button>
+      <button @click=${onDelete} data-id=${data.id}>Delete</button>
     </td>
   </tr>`
 
