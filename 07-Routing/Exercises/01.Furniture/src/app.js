@@ -6,6 +6,9 @@ import { showMyFurnitureView } from "./views/myFurnitureView.js";
 import { showRegisterView } from "./views/registerView.js";
 import { userService } from "./service/userService.js";
 import { updateNav } from "./utility/renderNavigation.js";
+import { showDetailsView } from "./views/detailsView.js";
+import { deleteItem } from "./views/deleteView.js";
+import { showEdit } from "./views/editView.js";
 
 page(decorateContext)
 page('/', showHomeView);
@@ -14,6 +17,9 @@ page('/create', showCreateView);
 page('/login', showLoginView);
 page('/register', showRegisterView);
 page('/logout', onLogout);
+page('/details/:id', showDetailsView);
+page('/delete/:id', deleteItem);
+page('/edit/:id', showEdit);
 page('/my-furniture', showMyFurnitureView);
 
 page.start();
