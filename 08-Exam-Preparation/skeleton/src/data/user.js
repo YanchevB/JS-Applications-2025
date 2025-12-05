@@ -12,6 +12,7 @@ async function login(email, password) {
 
   const userData = {
     id: result._id,
+    email: result.email,
     accessToken: result.accessToken
   }
 
